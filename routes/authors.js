@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const expressLayouts = require('express-ejs-layouts');
 const Author = require('../models/author');
+let searchOptions = {};
 
 //All Authors Route
 router.get('/', async (req, res) => {
-	let searchOptions = {};
 	if (req.query.name && req.query.name !== "") {
 		searchOptions.name = new RegExp(req.query.name, 
 			'i')
