@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const expressLayouts = require('express-ejs-layouts');
 const Author = require('../models/author');
-let searchOptions = {};
 
 //All Authors Route
 router.get('/', async (req, res) => {
+	let searchOptions = {};
 	if (req.query.name && req.query.name !== "") {
 		searchOptions.name = new RegExp(req.query.name, 
 			'i')
@@ -34,11 +34,11 @@ router.post('/', async (req, res) => {
 	try {
 		const newAuthor = await author.save()
 		// res.redirect(`authors/${newAuthor.id}`)
-		res.render(`authors/index`, author)		
+		res.redirect(`authors/index`)		
 	} catch {
 		let locals = { errorMessage: 'Error creating Author' }
 		res.render('authors/new', {author, locals} ) 		
 	}	
 });
 
-module.exports = router; 
+module.exports = router;
