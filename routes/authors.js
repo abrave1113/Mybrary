@@ -5,7 +5,7 @@ const Author = require('../models/author');
 
 //All Authors Route
 router.get('/', async (req, res) => {
-	let searchOptions = {};
+	let searchOptions = {req.query.name};
 	if (req.query.name && req.query.name !== '') {
 		searchOptions.name = new RegExp(req.query.name, 
 			'i')
@@ -28,18 +28,17 @@ router.get('/new', (req, res) => {
 
 //Create Author Route
 router.post('/', async (req, res) => {
-	res.send('Create')
-	// const author = new Author({
-	// 	name: req.body.name
-	// })
-	// try {
-	// 	const newAuthor = await author.save()
-	// 	// res.redirect(`authors/${newAuthor.id}`)
-	// 	res.redirect(`authors `)		
-	// } catch {
-	// 	let locals = { errorMessage: err }
-	// 	res.render('authors/new', {author: author, locals} ) 		
-	// }	
+	const author = new Author({
+		name: req.body.name
+	})
+	try {
+		const newAuthor = await author.save()
+		// res.redirect(`authors/${newAuthor.id}`)
+		res.redirect(`authors `)		
+	} catch {
+		let locals = { errorMessage: err }
+		res.render('authors/new', {author: author, locals} ) 		
+	}	
 });
 
 module.exports = router;
