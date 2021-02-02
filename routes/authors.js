@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const expressLayouts = require('express-ejs-layouts');
 const Author = require('../models/author');
+let mongoose = require('mongoose')
 
 //All Authors Route
 router.get('/', async (req, res) => {
