@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const expressLayouts = require('express-ejs-layouts');
 const Author = require('../models/author');
-let mongoose = require('mongoose')
+let mongoose = require('mongoose');
 
 //All Authors Route
 router.get('/', async (req, res) => {
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 			authors: authors,
 			searchOptions: req.query 
 		})
-	} catch {
+	} catch (e) {
 		res.redirect('/')
 	}
 });
@@ -35,9 +35,12 @@ router.post('/', async (req, res) => {
 		const newAuthor = await author.save()
 		// res.redirect(`authors/${newAuthor.id}`)
 		res.redirect(`authors`)		
-	} catch {
-		let locals = { errorMessage: 'Error updating Author' }
-		res.render('authors/new', {author: author, errorMessage: locals.errorMessage } ) 		
+	} catch (e) {
+		let locals = { errorMessage: 'Error creating Author' }
+		res.render('authors/new', {
+			author: author, 
+			errorMessage: locals.errorMessage 
+		}) 		
 	}	
 });
 
