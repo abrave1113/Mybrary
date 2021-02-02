@@ -5,10 +5,9 @@ const Author = require('../models/author');
 
 //All Authors Route
 router.get('/', async (req, res) => {
-	let searchOptions = { name: RegExp(req.query.name,'i')};
+	let searchOptions = {};
 	if (req.query.name && req.query.name !== '') {
-		searchOptions.name = new RegExp(req.query.name, 
-			'i')
+		searchOptions.name = new RegExp(req.query.name, 'i')
 	} 							// bc while post req are in body, get are in query strings in url
 	try {
 		const authors = await Author.find(searchOptions)
