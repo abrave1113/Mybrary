@@ -16,7 +16,8 @@ router.get('/', async (req, res) => {
 			authors: authors,
 			searchOptions: req.query 
 		})
-	} catch {
+	} catch (err) {
+		console.log(err)
 		res.redirect('/')
 	}
 });
