@@ -36,7 +36,6 @@ router.post('/', async (req, res) => {
 		// res.redirect(`authors/${newAuthor.id}`)
 		res.redirect(`authors`)		
 	} catch (e) {
-		let locals = { errorMessage: 'Error creating Author' }
 		res.render('authors/new', {
 			author: author, 
 			errorMessage: locals.errorMessage 
