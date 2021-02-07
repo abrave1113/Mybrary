@@ -7,10 +7,11 @@ const Book = require('../models/book');
 const uploadPath = path.join('public', Book.coverImageBasePath)
 const imageMimeTypes = ['images/jpeg','images/png','images/gif', ]
 const Author = require('../models/author');
+const mongoose = require('mongoose');
 const upload = multer({
 	dest: uploadPath,
 	fileFilter: (req, file, callback) => {
-		callback(null, )
+		callback(null, imageMimeTypes.includes(file.mimetype))
 	}
 });
 
@@ -36,7 +37,6 @@ router.post('/', upload.single('cover'), async (req, res) => {
 		coverImageName: filename,
 		description: req.body.description
 	})
-
 	try {
 		const newBook = await book.save()
 		// res.redirect(`books/${newBook.id}`)
