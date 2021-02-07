@@ -28,7 +28,7 @@ router.get('/new', async (req, res) => {
 
 //Create Book Route
 router.post('/', upload.single('cover'), async (req, res) => {
-	const fileName = req.file != null ? req.file.filename : null
+	const fileName = req.file !== null ? req.file.filename : null
 	const book = new Book({
 		title: req.body.title,
 		author: req.body.author,
