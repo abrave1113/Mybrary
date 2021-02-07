@@ -35,4 +35,6 @@ const bookSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Book', bookSchema);	
-module.exports.coverImageBasePath = coverImageBasePath; 
+module.exports.coverImageBasePath = coverImageBasePath;
+
+// save version
