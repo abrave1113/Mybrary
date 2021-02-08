@@ -1,7 +1,7 @@
 Filepond.registerPlugin(
     FilepondPluginImagePreview,
     FilepondPluginImageResize,
-    FilepondPluginFileEncode
+    FilepondPluginFileEncode,
 )
 
 Filepond.parse(document.body);
