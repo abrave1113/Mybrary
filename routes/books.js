@@ -5,9 +5,9 @@ const fs = require ('fs');
 const expressLayouts = require('express-ejs-layouts');
 const Book = require('../models/book');
 const uploadPath = path.join('public', Book.coverImageBasePath)
-const imageMimeTypes = ['image/jpeg','image/png','image/gif' ]
 const Author = require('../models/author');
 const mongoose = require('mongoose');
+// const imageMimeTypes = ['image/jpeg','image/png','image/gif' ]
 // const upload = multer({
 // 	dest: uploadPath,
 // 	fileFilter: (req, file, callback) => {
@@ -58,8 +58,7 @@ router.post('/', async (req, res) => {
 		const newBook = await book.save()
 		// res.redirect(`books/${newBook.id}`)
 		res.redirect(`books`)	
-	}
-	catch {
+	} catch {
 		renderNewPage(res, book, true)
 	}
 });
@@ -85,7 +84,7 @@ async function renderNewPage(res, book, hasError=false) {
 }
 
 function saveCover(book, coverEncoded) {
-	if (coverEncoded === null) return
+	if (coverEncoded == null) return
 	const cover = JSON.parse(coverEncoded)
 	if (cover != null && imageMimeTypes.includes(cover.type)) {
 		book.coverImage = new Buffer.from(cover.data, 'base64')
