@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const fs = require ('fs');
 const expressLayouts = require('express-ejs-layouts');
 const Book = require('../models/book');
-const uploadPath = path.join('public', Book.coverImageBasePath)
 const Author = require('../models/author');
 const mongoose = require('mongoose');
 const imageMimeTypes = ['image/jpeg','image/png','image/gif' ]
