@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const expressLayouts = require('express-ejs-layouts');
 const Author = require('../models/author');
-let mongoose = require('mongoose');
+const Book = require('../models/book')
 
 //All Authors Route
 router.get('/', async (req, res) => {
@@ -45,12 +45,13 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const author = await Author.find(req.params.id)
-		const books = await books.find({author: author.id}).limit(6).exec()
+		const books = await Book.find({author: author.id}).limit(6).exec()
 		res.render('author/show', { 
 			author: author,
 			booksByAuthor: books
 		})
-	} catch {
+	} catch (err) {
+		console.log(err)
 		res.redirect('/')
 	}
 })
