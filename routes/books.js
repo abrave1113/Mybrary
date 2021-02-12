@@ -53,8 +53,7 @@ router.post('/', async (req, res) => {
 	saveCover(book, req.body.cover)
 	try {
 		const newBook = await book.save()
-		// res.redirect(`books/${newBook.id}`)
-		res.redirect(`books`)	
+		res.redirect(`books/${newBook.id}`)
 	} catch {
 		renderNewPage(res, book, true)
 	}
@@ -85,6 +84,31 @@ router.get('/:id/edit', async (req, res) => {
 		res.redirect('/')
 	}
 })
+
+//Update Book Route
+router.put('/:id', async (req, res) => {
+		let book
+		try {
+			book = await Book.findById(req.params.id)
+			book.title = req.body.title
+			book.author = req.body.authorId
+			book.publishDate = new Date (req.body.publishDate)
+			book.pageCount = req.body.pageCount
+			book.description = req.body.description
+			if(req.body.cover != null && req.body.cover !== null) {
+				saveCover(book, req.body.cover)
+			}
+			await book.save()
+			res.redirect(`/books/${book.id}`)
+		} catch {
+			if (book != null) {
+				renderEditPage(res, book, true)
+			} else {
+				redirect('/')      
+		}
+	}   
+});
+
 
 async function renderNewPage(res, book, hasError=false) {
 	renderFormPage(res, book, 'new', hasError)
