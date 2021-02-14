@@ -70,7 +70,8 @@ router.get('/:id', async (req, res) => {
 	try {
 		const book = await Book.findById(req.params.id).populate('author').exec()
 		res.render('books/show', { book: book})
-	} catch {
+	} catch (err) {
+		console.log(err)
 		res.redirect('/')
 	}
 })
